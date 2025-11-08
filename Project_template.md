@@ -66,3 +66,13 @@ GPU: NVIDIA A100 40Гб
 неё лучшее понимание промтов RAG и хорошее качество на английском и русском языках. В модели 
 all-mpnet-base-v2 хорошая поддержка английского и технических терминов, а также показывает лучшее 
 качество на бенчмарках, в сравнении с all-MiniLM-L6-v2 и paraphrase-multilingual.
+
+### Задание 2
+
+С помощью скрипта на python была сформирована папка с документами в txt (из https://starwars.fandom.com/): Task 2/starwars_pages
+
+Папка с уникальными документами: Task 2/starwars_pages
+Скрипт подмены терминов: Task 2/replace_terms.py
+Словарь замен: Task 2/terms_map.json
+Были взяты все страницы из Skywalker Saga, Standalone films/Canon, Live-action series. Замена выполнялась с помощью скрипта на python, словарь описан в terms_map.json
+Финальная база: Task 2/knowledge_base/
