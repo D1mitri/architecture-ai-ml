@@ -76,3 +76,19 @@ all-mpnet-base-v2 хорошая поддержка английского и т
 Словарь замен: Task 2/terms_map.json
 Были взяты все страницы из Skywalker Saga, Standalone films/Canon, Live-action series. Замена выполнялась с помощью скрипта на python, словарь описан в terms_map.json
 Финальная база: Task 2/knowledge_base/
+
+### Задание 3
+
+На macos в docker запустил скрипт на python.
+С моделью all-mpnet-base-v2 возникли проблемы при загрузке, поэтому использовал модель полегче - all-MiniLM-L6-v2.
+В качестве БД использовал Chroma.
+Из 31 текстового файла получилось 4894 чанка.
+Генерация составила примерно 5-6 минут с учетом загрузки модели all-MiniLM-L6-v2 порядка 30 секунд.
+Примеры запросов:
+Запрос: Splinter
+   Star_Wars__Episode_III_Revenge_of_the_Sith.txt
+   Splinter and a group of clone troopers from the 41st Elite C...
+Запрос: Xarn Velgor
+   Rogue_One__A_Star_Wars_Story.txt
+   Wars Story "The Xarn Velgor Effect" on the official Star War...
+
