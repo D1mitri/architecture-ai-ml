@@ -1,0 +1,52 @@
+services:
+  rag-bot:
+    build: .
+    container_name: starwars-rag-bot
+    volumes:
+      - .:/app
+      - ./chroma_db:/app/chroma_db
+      - ./starwars_pages:/app/starwars_pages
+    working_dir: /app
+    environment:
+      - PYTHONUNBUFFERED=1
+    stdin_open: true
+    tty: true
+    command: python interactive_rag.py
+    profiles:
+      - run
+
+  index-builder:
+    build: .
+    container_name: starwars-index-builder
+    volumes:
+      - .:/app
+      - ./chroma_db:/app/chroma_db
+      - ./starwars_pages:/app/starwars_pages
+    working_dir: /app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CHROMA_DB_PATH=/app/chroma_db
+      - STARWARS_PAGES_PATH=/app/starwars_pages
+    command: python build_index.py
+    profiles:
+      - index
+
+  fix-index:
+    build: .
+    container_name: starwars-fix-index
+    volumes:
+      - .:/app
+      - ./chroma_db:/app/chroma_db
+      - ./starwars_pages:/app/starwars_pages
+    working_dir: /app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CHROMA_DB_PATH=/app/chroma_db
+      - STARWARS_PAGES_PATH=/app/starwars_pages
+    command: >
+      sh -c "echo 'Удаление старой базы данных' &&
+             rm -rf /app/chroma_db &&
+             echo 'Построение нового индекса' &&
+             python build_index.py"
+    profiles:
+      - fix-index
